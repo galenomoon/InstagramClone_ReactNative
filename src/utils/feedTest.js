@@ -1,38 +1,38 @@
 const feedTest = [
   {
     id: '1',
-    nome: 'Lucas_Silva',
-    descricao: 'Mais um dia de muitos bugs :)',
-    imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png',
-    imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto1.png'
+    username: 'Lucas_Silva',
+    description: 'Mais um dia de muitos bugs :)',
+    profilePic: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png',
+    postImage: 'https://sujeitoprogramador.com/instareact/foto1.png'
   },
   {
     id: '2',
-    nome: 'lillil_ofc',
-    descricao: 'Isso sim é ser raiz!!!!!',
-    imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png',
-    imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto2.png'
+    username: 'lillil_ofc',
+    description: 'Isso sim é ser raiz!!!!!',
+    profilePic: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png',
+    postImage: 'https://sujeitoprogramador.com/instareact/foto2.png'
   },
   {
     id: '3',
-    nome: 'Jose_Augusto',
-    descricao: 'Bora trabalhar Haha',
-    imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil3.png',
-    imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto3.png'
+    username: 'Jose_Augusto',
+    description: 'Bora trabalhar Haha',
+    profilePic: 'https://sujeitoprogramador.com/instareact/fotoPerfil3.png',
+    postImage: 'https://sujeitoprogramador.com/instareact/foto3.png'
   },
   {
     id: '4',
-    nome: 'Gustavo_Henrique',
-    descricao: 'Isso sim que é TI!',
-    imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png',
-    imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto4.png'
+    username: 'Gustavo_Henrique',
+    description: 'Isso sim que é TI!',
+    profilePic: 'https://sujeitoprogramador.com/instareact/fotoPerfil1.png',
+    postImage: 'https://sujeitoprogramador.com/instareact/foto4.png'
   },
   {
     id: '5',
-    nome: 'Guilhermegaleno_oficial',
-    descricao: 'Boa tarde galera do insta...',
-    imgperfil: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png',
-    imgPublicacao: 'https://sujeitoprogramador.com/instareact/foto5.png'
+    username: 'Guilhermegaleno_oficial',
+    description: 'Boa tarde galera do insta...',
+    profilePic: 'https://sujeitoprogramador.com/instareact/fotoPerfil2.png',
+    postImage: 'https://sujeitoprogramador.com/instareact/foto5.png'
   }
 ]
 

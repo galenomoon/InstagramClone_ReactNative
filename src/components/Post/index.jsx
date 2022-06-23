@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
 //styles
 import Icon from 'react-native-vector-icons/Ionicons';
+import * as Animatable from 'react-native-animatable';
 
 //utils
 import MyTouchableOpacity from '../../utils/myTouchableOpacity';
@@ -10,19 +11,36 @@ import MyTouchableOpacity from '../../utils/myTouchableOpacity';
 export default function Post({ post }) {
   const [like, setLike] = useState(false);
   const [save, setSave] = useState(false);
-  const username = <Text style={styles.text}>{post.nome.toLowerCase()}</Text>
+  const [loading, setLoading] = useState(false);
+  const username = <Text style={styles.text}>{post.username.toLowerCase()}</Text>
+
+  useEffect(() => {
+    setTimeout(() => loading && setLoading(false), 3000);
+  }, [loading])
 
   return (
     <View style={{ marginVertical: 10 }}>
       <View style={styles.header}>
         <View style={styles.center}>
-          <MyTouchableOpacity children={<Image style={styles.profilePic} source={{ uri: post.imgperfil }} />} />
+          <MyTouchableOpacity children={<Image style={styles.profilePic} source={{ uri: post.profilePic }} />} />
           <MyTouchableOpacity children={username} />
         </View>
         <MyTouchableOpacity children={<Icon name="ellipsis-vertical" size={20} color="#fff" />} />
       </View>
       <View style={styles.body}>
-        <Image style={styles.picture} source={{ uri: post.imgPublicacao }} />
+
+        <MyTouchableOpacity
+          doubleClick
+          onPress={() => [setLike(!like), setLoading(!like)]}
+          style={{ position: 'absolute', zIndex: 23, height: '100%', width: '100%', justifyContent: 'center', }}
+          children={
+            loading && like &&
+            <Animatable.Text animation={"bounceIn", "bounceOut"} duration={1500} easing="ease-out" style={{ textAlign: 'center' }}>
+              <Icon name="heart" size={75} color={"#fff"} />
+            </Animatable.Text>
+          }
+        />
+        <Image style={styles.picture} source={{ uri: post.postImage }} />
       </View>
       <View style={styles.footer}>
         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", width: 150, paddingVertical: 5 }}>
@@ -34,7 +52,7 @@ export default function Post({ post }) {
       </View>
       <View style={[styles.footer, { justifyContent: "flex-start", alignItems: 'baseline', marginHorizontal: 10 }]}>
         {username}
-        <Text style={styles.description}> {post.descricao}</Text>
+        <Text style={styles.description}> {post.description}</Text>
       </View>
     </View>
   )
