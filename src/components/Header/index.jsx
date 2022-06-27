@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <View style={styles.container}>
       <View style={[styles.header, { paddingHorizontal: 20 }]}>
-        <MyPress children={<Image style={styles.logo} source={require('../../../assets/logo.png')} tintColor="#fff" />} />
+        <MyPress children={<Image style={styles.logo} source={require('../../../assets/logo.svg.png')} tintColor="#fff" />} />
         <MyPress style={styles.send} children={<Icon name="send" size={20} color="#fff" />} />
       </View>
     </View>
@@ -24,14 +24,15 @@ const styles = StyleSheet.create({
   },
   header: {
     justifyContent: 'space-between',
-    paddingVertical: 10,
+    marginVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 0.2,
     shadowColor: '#000',
   },
   logo: {
-    transform: [{ scale: 1.2 }],
-    marginLeft: 10
+    width: 150,
+    height: 50,
+
   }
 })
