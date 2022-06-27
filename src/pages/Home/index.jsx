@@ -8,10 +8,8 @@ import Header from '../../components/Header';
 export default function InstaGaleno() {
   return (
     <View style={styles.container}>
-      <Header/>
-      <View style={styles.body}>
-        <Feed />
-      </View>
+      <Header />
+      <Feed />
     </View>
   );
 }
@@ -20,10 +18,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#111',
     paddingVertical: 25,
-  },
-  h1: {
-    color: '#fff',
-    fontSize: 25,
-    fontWeight: 'bold',
   }
 });

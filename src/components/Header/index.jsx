@@ -5,22 +5,26 @@ import { StyleSheet, View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 //utils
-import MyTouchableOpacity from '../../utils/myTouchableOpacity';
+import MyPress from '../../utils/MyPress';
 
 export default function Header() {
   return (
-    <View style={styles.header}>
-      <MyTouchableOpacity children={<Image style={styles.logo} source={require('../../../assets/logo.png')} tintColor="#fff" />} />
-      <MyTouchableOpacity children={<Icon name="send" size={20} color="#fff" />} />
+    <View style={styles.container}>
+      <View style={[styles.header, { paddingHorizontal: 20 }]}>
+        <MyPress children={<Image style={styles.logo} source={require('../../../assets/logo.png')} tintColor="#fff" />} />
+        <MyPress style={styles.send} children={<Icon name="send" size={20} color="#fff" />} />
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "column",
+  },
   header: {
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 0.2,

@@ -1,74 +1,59 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
-//styles
-import Icon from 'react-native-vector-icons/Ionicons';
-import * as Animatable from 'react-native-animatable';
+//components
+import Author from '../Author';
+import Comments from '../Comments';
+import PostActions from '../PostActions';
+import PostPicture from '../PostPic';
+import Stories from '../Stories';
 
 //utils
-import MyTouchableOpacity from '../../utils/myTouchableOpacity';
+import MyPress from '../../utils/MyPress';
 
-export default function Post({ post }) {
+export default function Post({ post, index }) {
   const [like, setLike] = useState(false);
   const [save, setSave] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [commentsLength, setCommentsLength] = useState(post.comments.length)
+  const [hasComments, setHasComments] = useState(commentsLength > 0)
   const [loading, setLoading] = useState(false);
-  const username = <Text style={styles.text}>{post.username.toLowerCase()}</Text>
 
   useEffect(() => {
     setTimeout(() => loading && setLoading(false), 3000);
   }, [loading])
 
-  return (
-    <View style={{ marginVertical: 10 }}>
+  return (<>
+    {index === 0 &&
       <View style={styles.header}>
-        <View style={styles.center}>
-          <MyTouchableOpacity children={<Image style={styles.profilePic} source={{ uri: post.profilePic }} />} />
-          <MyTouchableOpacity children={username} />
-        </View>
-        <MyTouchableOpacity children={<Icon name="ellipsis-vertical" size={20} color="#fff" />} />
+        <ScrollView horizontal={true}>
+          <Stories />
+        </ScrollView>
       </View>
-      <View style={styles.body}>
-
-        <MyTouchableOpacity
-          doubleClick
-          onPress={() => [setLike(!like), setLoading(!like)]}
-          style={{ position: 'absolute', zIndex: 23, height: '100%', width: '100%', justifyContent: 'center', }}
-          children={
-            loading && like &&
-            <Animatable.Text animation={"bounceIn", "bounceOut"} duration={1500} easing="ease-out" style={{ textAlign: 'center' }}>
-              <Icon name="heart" size={75} color={"#fff"} />
-            </Animatable.Text>
-          }
-        />
-        <Image style={styles.picture} source={{ uri: post.postImage }} />
+    }
+    <View style={{ marginVertical: 10 }}>
+      <Author username={post.username} profilePic={post.profilePic} />
+      <View>
+        <PostPicture postImage={post.postImage} setLike={setLike} like={like} setLoading={setLoading} loading={loading} />
       </View>
       <View style={styles.footer}>
-        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around", width: 150, paddingVertical: 5 }}>
-          <MyTouchableOpacity onPress={() => setLike(!like)} children={<Icon name={`heart${like ? "" : "-outline"}`} size={30} color={`${like ? "#f2304a" : "#fff"}`} />} />
-          <MyTouchableOpacity children={<Icon name="chatbubble-outline" size={30} color="#fff" />} />
-          <MyTouchableOpacity children={<Icon name="paper-plane-outline" size={30} color="#fff" />} />
-        </View>
-        <MyTouchableOpacity onPress={() => setSave(!like)} children={<Icon name={`bookmark${save ? "" : "-outline"}`} size={30} color="#fff" />} />
+        <PostActions setLike={setLike} like={like} setSave={setSave} save={save} />
       </View>
-      <View style={[styles.footer, { justifyContent: "flex-start", alignItems: 'baseline', marginHorizontal: 10 }]}>
-        {username}
-        <Text style={styles.description}> {post.description}</Text>
-      </View>
+      <Comments username={post.username} description={post.description} isCaption />
+      <View style={{ flex: 1, borderBottomColor: "#333", borderWidth: 0.5, margin: 5 }} />
+      {showComments ?
+        post.comments.map((comment, idx) => <Comments username={comment.username} description={comment.comment} commentsLength={commentsLength} key={idx} />)
+        :
+        hasComments && <MyPress children={
+          <Text style={styles.description}>View all {commentsLength} comments</Text>
+        } onPress={() => setShowComments(!showComments)} />
+      }
     </View>
+  </>
   )
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    shadowColor: "#000",
-    paddingHorizontal: 10,
-    paddingBottom: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  center: { flexDirection: "row", alignItems: "center" },
   footer: {
     flex: 1,
     paddingHorizontal: 5,
@@ -77,22 +62,19 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center"
   },
-  profilePic: {
-    width: 30,
-    height: 30,
-    borderRadius: 100,
-    marginHorizontal: 10
-  },
-  text: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  picture: {
-    width: "100%",
-    height: 300
-  },
   description: {
-    color: "#f0f0f0",
+    flex: 1,
+    color: "#a3a3a3",
     fontSize: 12,
-  }
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  header: {
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 0.2,
+    shadowColor: '#000',
+  },
 });
