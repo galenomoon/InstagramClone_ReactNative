@@ -2,17 +2,26 @@ import React from 'react';
 import { StyleSheet, View, Image } from 'react-native';
 
 //styles
-import Icon from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
+// navigation
+import { useNavigation } from '@react-navigation/native';
 
 //utils
 import MyPress from '../../utils/MyPress';
 
 export default function Header() {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={[styles.header, { paddingHorizontal: 20 }]}>
         <MyPress children={<Image style={styles.logo} source={require('../../../assets/logo.svg.png')} tintColor="#fff" />} />
-        <MyPress style={styles.send} children={<Icon name="send" size={20} color="#fff" />} />
+        <View style={styles.actions}>
+          <MyPress onPress={() => navigation.navigate("AddPost") } children={<FontAwesome name={'plus-square-o'} size={29} color={'#fff'} />} />
+          <MyPress children={<Ionicons name="send" size={20} color="#fff" />} />
+        </View>
       </View>
     </View>
   )
@@ -33,6 +42,11 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 50,
-
+  },
+  actions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: 90,
   }
 })

@@ -37,7 +37,7 @@ export default function Post({ post, index }) {
         <PostPicture postImage={post.postImage} setLike={setLike} like={like} setLoading={setLoading} loading={loading} />
       </View>
       <View style={styles.footer}>
-        <PostActions setLike={setLike} like={like} setSave={setSave} save={save} />
+        <PostActions setLike={setLike} like={like} setSave={setSave} save={save} comments={post.comments} />
       </View>
       <Comments username={post.username} description={post.description} isCaption />
       <View style={{ flex: 1, borderBottomColor: "#333", borderWidth: 0.5, margin: 5 }} />
