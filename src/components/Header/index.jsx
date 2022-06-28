@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 
 //styles
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 // navigation
 import { useNavigation } from '@react-navigation/native';
@@ -19,9 +20,21 @@ export default function Header() {
       <View style={[styles.header, { paddingHorizontal: 20 }]}>
         <MyPress children={<Image style={styles.logo} source={require('../../../assets/logo.svg.png')} tintColor="#fff" />} />
         <View style={styles.actions}>
-          <MyPress onPress={() => navigation.navigate("AddPost") } children={<FontAwesome name={'plus-square-o'} size={29} color={'#fff'} />} />
+          <MyPress onPress={() => navigation.navigate("AddPost")} children={<FontAwesome name={'plus-square-o'} size={29} color={'#fff'} />} />
           <MyPress children={<Ionicons name="send" size={20} color="#fff" />} />
         </View>
+      </View>
+    </View>
+  )
+}
+
+export function HeaderWithArrowBack({ backTo, title }) {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <View style={[styles.header]}>
+        <MyPress onPress={() => navigation.navigate(backTo)} children={<AntDesign name="arrowleft" size={30} color="#fff" />} />
+        <MyPress children={<Text style={styles.title}>{title}</Text>} />
       </View>
     </View>
   )
@@ -48,5 +61,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     width: 90,
+  },
+  title: {
+    fontWeight: 'bold',
+    color: "#fff",
+    fontSize: 23,
+    marginHorizontal: 20
   }
+
 })

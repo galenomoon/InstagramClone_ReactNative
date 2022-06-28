@@ -1,36 +1,82 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, TextInput, Image, Text } from 'react-native'
 
 // navigation
 import { useRoute } from '@react-navigation/native';
 
-const Comments = () => {
+//components
+import Comments from '../../components/Comments';
+
+const CommentsPage = () => {
   const route = useRoute().params;
-  const [comments, setComments ] = useState()
 
   return (
     <View style={styles.container}>
- <FlatList
-      showsVerticalScrollIndicator={false}
-      showsHorizontalScrollIndicator={false}
-      keyExtractor={(item) => item.id}
-      data={route?.comments}
-      renderItem={({ item, index }) => <Text key={index} style={styles.comment}>{item.comment}</Text>}
-    />
+      <View style={styles.list}>
+        <Comments
+          comments={route?.comments}
+          isCommentPage
+        />
+      </View>
+      <View style={styles.containerInput}>
+        <Image style={styles.picture} source={{ uri: route?.author.profilePic }} />
+        <TextInput
+          style={styles.input}
+          placeholder="Add a Comment..."
+          placeholderTextColor="#aaa"
+          multiline={true}
+        />
+        <Text style={styles.post}>
+          Post
+        </Text>
+      </View>
     </View>
   )
 }
 
-export default Comments
+export default CommentsPage
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#111',
-    paddingVertical: 25,
+    alignItems: 'center',
+    justifyContent:'space-between'
   },
-  comment:{
-    color: "#fff",
-    fontSize: 20
+  post: {
+    flex: 1,
+    color: '#1f7DE6',
+    fontWeight: 'bold',
+    fontSize: 13,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  list: {
+    height: "50%",
+    marginTop:20,
+    alignItems: 'center',
+  },
+  input: {
+    flex: 5,
+    padding: 10,
+    color: '#fff',
+  },
+  containerInput: {
+    width: "100%",
+    backgroundColor: '#333',
+    color: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+
+  },
+  picture: {
+    width: 40,
+    height: 40,
+    borderRadius: 100,
+    borderWidth: 2,
+    marginHorizontal: 16,
+    borderWidth: 0.5,
+    borderColor: "#777"
   }
 });

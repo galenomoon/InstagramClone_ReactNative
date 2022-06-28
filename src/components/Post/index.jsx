@@ -3,10 +3,11 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
 //components
 import Author from '../Author';
-import Comments from '../Comments';
+import Comment from '../Comment';
 import PostActions from '../PostActions';
 import PostPicture from '../PostPic';
 import Stories from '../Stories';
+import Comments from '../Comments';
 
 //utils
 import MyPress from '../../utils/MyPress';
@@ -37,16 +38,16 @@ export default function Post({ post, index }) {
         <PostPicture postImage={post.postImage} setLike={setLike} like={like} setLoading={setLoading} loading={loading} />
       </View>
       <View style={styles.footer}>
-        <PostActions setLike={setLike} like={like} setSave={setSave} save={save} comments={post.comments} />
+        <PostActions author={{username: post.username, profilePic: post.profilePic}} setLike={setLike} like={like} setSave={setSave} save={save} comments={post.comments} />
       </View>
-      <Comments username={post.username} description={post.description} isCaption />
+      <Comment comment={{ comment: post.description, username: post.username }} isCaption={true} />
       <View style={{ flex: 1, borderBottomColor: "#333", borderWidth: 0.5, margin: 5 }} />
-      {showComments ?
-        post.comments.map((comment, idx) => <Comments username={comment.username} description={comment.comment} commentsLength={commentsLength} key={idx} />)
-        :
-        hasComments && <MyPress children={
-          <Text style={styles.description}>View all {commentsLength} comments</Text>
-        } onPress={() => setShowComments(!showComments)} />
+      {showComments ? <Comments comments={post.comments}  /> :
+        hasComments &&
+        <MyPress
+          children={<Text style={styles.description}>View all {commentsLength} comments</Text>}
+          onPress={() => setShowComments(!showComments)}
+        />
       }
     </View>
   </>

@@ -2,7 +2,6 @@ import { StatusBar } from 'expo-status-bar';
 
 //react-navigation
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 //pages
@@ -13,6 +12,9 @@ import AddPost from './src/pages/AddPost';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Comments from './src/pages/Comments';
+
+//components
+import { HeaderWithArrowBack } from './src/components/Header';
 
 export default function App() {
   const Tab = createBottomTabNavigator();
@@ -25,7 +27,6 @@ export default function App() {
           if (route.name === 'Home') return <Foundation name={'home'} size={33} color={color} />;
           if (route.name === 'Profile') return <Ionicons name={focused ? 'person-circle' : 'person-circle-outline'} size={33} color={color} />;
           if (route.name === 'Search') return <Ionicons name={focused ? 'search' : 'search-outline'} size={33} color={color} />;
-
         },
         tabBarButton: ['AddPost', 'Comments'].includes(route.name) ? () => null : undefined,
         tabBarActiveTintColor: 'white',
@@ -40,7 +41,13 @@ export default function App() {
         <Tab.Screen name="Search" options={{ headerShown: false }} component={Home} />
         <Tab.Screen name="Profile" options={{ headerShown: false }} component={Home} />
         <Tab.Screen name="AddPost" options={{ headerShown: false }} component={AddPost} />
-        <Tab.Screen name="Comments" options={{ headerShown: false }} component={Comments} />
+        <Tab.Screen name="Comments"
+          options={{
+            headerTitle: () => <HeaderWithArrowBack backTo={"Home"} title={"Comments"} />,
+            headerStyle: { backgroundColor: '#111' }
+          }}
+          component={Comments}
+        />
       </Tab.Navigator>
     </NavigationContainer>
   );
