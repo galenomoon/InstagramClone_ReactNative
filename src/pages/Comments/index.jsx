@@ -6,6 +6,7 @@ import { useRoute } from '@react-navigation/native';
 
 //components
 import Comments from '../../components/Comments';
+import MyPress from '../../utils/MyPress';
 
 const CommentsPage = () => {
   const route = useRoute().params;
@@ -26,9 +27,12 @@ const CommentsPage = () => {
           placeholderTextColor="#aaa"
           multiline={true}
         />
-        <Text style={styles.post}>
-          Post
-        </Text>
+        <MyPress children={
+          <Text style={{ color: '#1f7DE6', fontWeight: 'bold' }} >
+            Post
+          </Text>
+        }
+          style={styles.post} />
       </View>
     </View>
   )
@@ -41,19 +45,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#111',
     alignItems: 'center',
-    justifyContent:'space-between'
+    justifyContent: 'space-between'
   },
   post: {
     flex: 1,
-    color: '#1f7DE6',
-    fontWeight: 'bold',
     fontSize: 13,
     justifyContent: 'center',
     alignItems: 'center'
   },
   list: {
     height: "50%",
-    marginTop:20,
+    marginTop: 20,
     alignItems: 'center',
   },
   input: {
