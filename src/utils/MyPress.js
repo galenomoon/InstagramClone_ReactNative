@@ -1,5 +1,5 @@
 
-import { TouchableWithoutFeedback as TO } from "react-native";
+import { TouchableOpacity as TO } from "react-native";
 import DoubleClick from 'rn-double-click'
 
 const MyPress = ({ doubleClick, children, onPress, style, onLongPress, delayLongPress }) =>

@@ -29,25 +29,14 @@ export default function App() {
           if (route.name === 'Search') return <Ionicons name={focused ? 'search' : 'search-outline'} size={33} color={color} />;
         },
         tabBarButton: ['AddPost', 'Comments'].includes(route.name) ? () => null : undefined,
-        tabBarActiveTintColor: 'white',
-        tabBarInactiveTintColor: 'white',
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: "#111",
-          borderTopWidth: 0
-        }
+        tabBarActiveTintColor: 'white', tabBarInactiveTintColor: 'white', tabBarShowLabel: false,
+        tabBarStyle: { backgroundColor: "#111", borderTopWidth: 0, height: 50, }
       })}>
         <Tab.Screen name="Home" options={{ headerShown: false }} component={Home} />
         <Tab.Screen name="Search" options={{ headerShown: false }} component={Home} />
         <Tab.Screen name="Profile" options={{ headerShown: false }} component={Home} />
-        <Tab.Screen name="AddPost" options={{ headerShown: false }} component={AddPost} />
-        <Tab.Screen name="Comments"
-          options={{
-            headerTitle: () => <HeaderWithArrowBack backTo={"Home"} title={"Comments"} />,
-            headerStyle: { backgroundColor: '#111' }
-          }}
-          component={Comments}
-        />
+        <Tab.Screen name="AddPost" component={AddPost} options={{ headerTitle: () => <HeaderWithArrowBack backTo="Home" title="Add a Post" />, headerStyle: { backgroundColor: '#111' } }} />
+        <Tab.Screen name="Comments" component={Comments} options={{ headerTitle: () => <HeaderWithArrowBack backTo={"Home"} title={"Comments"} />, headerStyle: { backgroundColor: '#111' } }} />
       </Tab.Navigator>
     </NavigationContainer>
   );

@@ -33,8 +33,8 @@ export function HeaderWithArrowBack({ backTo, title }) {
   return (
     <View style={styles.container}>
       <View style={[styles.header]}>
-        <MyPress onPress={() => navigation.navigate(backTo)} children={<AntDesign name="arrowleft" size={30} color="#fff" />} />
-        <MyPress children={<Text style={styles.title}>{title}</Text>} />
+        <MyPress onPress={() => navigation.navigate(backTo || "Home")} children={<AntDesign name="arrowleft" size={30} color="#fff" />} />
+        <Text style={styles.title}>{title}</Text>
       </View>
     </View>
   )

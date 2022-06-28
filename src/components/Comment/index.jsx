@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 
 //utils
 import MyPress from '../../utils/MyPress'
-
+import * as ImagePicker from 'expo-image-picker';
 //styles
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -15,6 +15,7 @@ export default function Comment({ comment, isCaption, isCommentPage }) {
 
   profilePic
   return (
+
     <View style={styles.container}>
       <View style={[{ flexDirection: 'row' }, isCommentPage ? { marginBottom: 15, width: 370 } : { marginVertical: 2, width: 300 }]}>
         {isCommentPage && <Image source={{ uri: profilePic }} style={styles.picture} />}

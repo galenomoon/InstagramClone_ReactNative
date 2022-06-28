@@ -18,7 +18,6 @@ export default function Feed() {
   )
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flexDirection: "column",
