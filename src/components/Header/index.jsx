@@ -28,13 +28,20 @@ export default function Header() {
   )
 }
 
-export function HeaderWithArrowBack({ backTo, title }) {
+export function HeaderWithArrowBack({ backTo, title, exitButton }) {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={[styles.header]}>
         <MyPress onPress={() => navigation.navigate(backTo || "Home")} children={<AntDesign name="arrowleft" size={30} color="#fff" />} />
         <Text style={styles.title}>{title}</Text>
+        {exitButton && <View style={{ width: 240, alignItems: 'flex-end', justifyContent: 'flex-end' }}>
+          <MyPress
+            style={styles.exit}
+            children={<Ionicons name="exit" color={"#FFF"} size={30} />}
+            onPress={()=> navigation.navigate('Login')}
+          />
+        </View>}
       </View>
     </View>
   )

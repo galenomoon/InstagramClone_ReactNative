@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { Text, Image, View, StyleSheet } from 'react-native';
+
+//libs
 import * as ImagePicker from 'expo-image-picker';
+
+//utils
 import MyPress from '../../utils/MyPress';
 
 export default function ImagePickerExample() {
   const [image, setImage] = useState(null);
 
   const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
